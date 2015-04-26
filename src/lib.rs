@@ -79,14 +79,30 @@ pub trait HList: Sized {
 impl HList for HNil {}
 impl<H, T: HList> HList for HCons<H, T> {}
 
+
 #[test]
-fn empty_hlist_type() {
-    hlist_type!(Empty);
-    let empty: Empty = HNil;
-    drop(empty);
+fn hlist_type_tests() {
+    hlist_type!(Zero);
+    hlist_type!(One, i32);
+    hlist_type!(Two, i32, i64);
+    let _: Zero = HNil;
+    let _: One = HNil.push(0i32);
+    let _: Two = HNil.push(0i32).push(0i64);
 }
 
 #[test]
-fn empty_generate_contains_impls() {
+fn contains_tests() {
     generate_contains_impls!();
+    generate_contains_impls!(i32);
+    generate_contains_impls!(i32, i64);
+    let _zero: HNil = HNil;
+    let one: HCons<i32, HNil> = HNil.push(1i32);
+    let two: HCons<i64, HCons<i32, HNil>> = HNil.push(1i32).push(2i64);
+    let one_val: &i32 = one.get();
+    let two_val_one: &i32 = two.get();
+    let two_val_two: &i64 = two.get();
+    assert!(one_val == &1i32);
+    assert!(two_val_one == &1i32);
+    assert!(two_val_two == &2i64);
 }
+
