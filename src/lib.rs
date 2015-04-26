@@ -69,7 +69,7 @@ macro_rules! generate_contains_impls {
 }
 
 pub trait HList: Sized {
-    fn insert<A: Sized>(self, a: A) -> HCons<A, Self> {
+    fn push<A: Sized>(self, a: A) -> HCons<A, Self> {
         HCons { head: a, tail: self }
     }
 }
