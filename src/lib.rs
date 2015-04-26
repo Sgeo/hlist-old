@@ -34,21 +34,19 @@ macro_rules! generate_hlist_contains {
     
         impl $crate::Contains<$last> for $hlist {
         
-            #[allow(unused_variables)]
             fn get(&self) -> &$last {
                 let cur_cell = self;
                 $(
-                    let head: &$init = &cur_cell.head; // Only used to refer to $init 
+                    let _head: &$init; // Only used to refer to $init 
                     let cur_cell = &cur_cell.tail;
                 )*
                 &cur_cell.head
             }
             
-            #[allow(unused_variables)]
             fn get_mut(&mut self) -> &mut $last {
                 let cur_cell = self;
                 $(
-                    let head: &$init = &cur_cell.head;
+                    let _head: &$init;
                     let cur_cell = &mut cur_cell.tail;
                 )*
                 &mut cur_cell.head
