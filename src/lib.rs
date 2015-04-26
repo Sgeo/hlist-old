@@ -80,5 +80,8 @@ impl HList for HNil {}
 impl<H, T: HList> HList for HCons<H, T> {}
 
 #[test]
-fn it_works() {
+fn empty_hlist_type() {
+    hlist_type!(Empty);
+    let empty: Empty = HNil;
+    drop(empty);
 }
