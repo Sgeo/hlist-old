@@ -85,3 +85,8 @@ fn empty_hlist_type() {
     let empty: Empty = HNil;
     drop(empty);
 }
+
+#[test]
+fn empty_generate_contains_impls() {
+    generate_contains_impls!();
+}
