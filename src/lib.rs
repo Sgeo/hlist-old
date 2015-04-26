@@ -104,3 +104,16 @@ fn contains_tests() {
     assert!(two_val_two == &2i64);
 }
 
+#[test]
+fn contains_mut_test() {
+    struct Local;
+    generate_contains_impls!(Local, i32, i64);
+    let mut list = HNil.push(Local).push(0i32).push(1i64);
+    {
+        let m: &mut i32 = list.get_mut();
+        *m = 5
+    }
+    let val: &i32 = list.get();
+    assert!(val == &5);
+}
+
